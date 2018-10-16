@@ -10,3 +10,15 @@ css3特性，flex布局
 Java核心技术
 设计模式
 了解Nighx、Canel、kafka、livequery等三方件
+
+前端技术栈：
+ES2015+
+- Vue js（支持 single file components ）
+- Vuex 状态管理，主要用于组件之间通信。Vue Devtools 对 Vuex 也有很好的开发时 debug 支持。
+- Less
+- parcel-bundler：零配置的打包工具，比 WebPack 易用
+- prettier：自动化格式化代码，保持代码风格一致
+- eslint：代码检查工具，消除低级代码错误，统一代码风格
+- husky: git hook(pre-commit and pre-push)自动运行 lint 和 test
+- babel：编译 ES2015+ 语言到 ES5
+- jest：单元测试
