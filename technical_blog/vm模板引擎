@@ -1,0 +1,48 @@
+基于Java的模板引擎，可以引用java中定义的对象，将java业务逻辑从web页面中剥离出来，提供最简单、最容易并且最整洁的方式合并页面动态内容。
+语法：
+定义变量
+#set ($name="lms")
+<div>hello,$name</div>
+如果右值是null,变量将指向一个已经存在的引用
+例如：
+#set ($name="a")
+#set($name = null)##此时name的值为a
+如果右值是变量并且被封闭在单引号内，则不做转换
+例如：
+#set ($name="a")
+#set ($name2='$name')##此时name的值为$name
+
+分支判断：
+<div #if($comp.width)style="width:$comp.width"#end></div>
+
+循环：
+#foreach( $mud in $nudsOnSpecial ) 
+  #if ( $customer.hasPurchased( $mud ) ) 
+    <tr><td>$flogger.getPromo( $mud )</td></tr> 
+  #end 
+#end
+默认变量$velocityCount用于循环计次
+
+注释：
+## 相当于//
+
+#* 相当于 /*
+*#       */
+
+#** 相当于/**
+*#        */
+
+正式格式：${comp.name},拼接场景下需要使用正式格式将变量隔离出来，如：${comp.name}_1
+
+当值没有定义的场景下展示为空的书写方法：$!{comp.name}或者$!comp.name,不加!值未定义的场景下展示为$comp.name
+
+转义字符：" 相当于\
+
+引入文件，为了安全的原因，被引入的本地文件只能在TEMPLATE_ROOT目录下
+#include(text.vm)
+
+重用模板：
+#macro ( d ) 
+<tr><td></td></tr> 
+#end 
+调用：#d()，当你的template被调用时，Velocity将用<tr><td></td></tr>替换为#d()。 
