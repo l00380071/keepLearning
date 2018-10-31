@@ -1,0 +1,32 @@
+1.安装方式
+去官网http://jakarta.apache.org下载安装包，解压
+
+2.启动
+配置JAVA_HOME环境变量，双击 bin 目录下的 startup.bat 文件启动，启动后在浏览器输入http://localhost:8080可看到启动页面
+
+3.日志
+启动日志可在logs目录下的catalina-xx.log中查看
+
+4.虚拟目录映射
+(1)在server.xml的host元素中配置context，需要重启tomcat（不建议）
+    例如<Host name="localhost"  appBase="webapps"
+              unpackWARs="true" autoDeploy="true"
+              xmlValidation="false" xmlNamespaceAware="false">
+ 
+          <Context path="/myWeb" docBase="D:\myProject" />
+       </Host>
+    访问http://localhost:8080/myWeb/index.jsp则会指向D:\myProject\index.jsp
+(2)Tomcat自动映射
+将工程放在tomcat的webApps目录下，Tomcat会自动映射到同名目录访问http://localhost:8080/myWeb/index.jsp则会指向webApps\myProject\index.jsp
+(3)在conf/Catalina/localhost目录下新增一个xx.xml,内容为<Context docBase="D:\myProject" />
+访问http://localhost:8080/xx/index.jsp则会指向D:\myProject\index.jsp,这种方式不需要重启服务器，文件名即是虚拟目录名。
+
+5.配置虚拟主机
+(1)在server.xml中配置host
+tomcat默认有一个localhost的虚拟主机,指向webapps下的应用，可仿照配置新增一个虚拟主机
+<Host name="www.lmshome.cn" appBase="D:\myProject">      
+</Host>
+(2)注册域名
+在C:\Windows\System32\drivers\etc\hosts文件中配置域名和ip的映射
+127.0.0.1 www.lmshome.cn
+完成上两步后，就可以在浏览器中通过http://www.lmshome.cn/index.html访问D:\myProject中的资源了。
